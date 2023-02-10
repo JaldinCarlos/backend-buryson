@@ -20,4 +20,11 @@ export const Group = sequelize.define(
   }
 );
 
-Group.hasMany(Event);
+Group.hasMany(Event, {
+  foreignKey: 'groupId',
+  sourceKey: 'id'
+});
+Event.belongsTo(Group, {
+  foreignKey: 'groupId',
+  targetKey: 'id'
+});

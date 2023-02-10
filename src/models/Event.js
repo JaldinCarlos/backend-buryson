@@ -1,7 +1,5 @@
 import { DataTypes, Sequelize } from "sequelize";
 import { sequelize } from "../database/database";
-import { Group } from "./Group";
-// import { Item } from "./Item";
 
 export const Event = sequelize.define(
     "events",
