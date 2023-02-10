@@ -1,8 +1,8 @@
 import app from "./app";
 import dotenv  from 'dotenv';
 import { sequelize } from "./database/database";
-// import { User } from "./models/User.js";
-import { UserModel } from "./models";
+// import { User } from "./models/User.js"; ->
+import "./models";
 
 dotenv.config();
 const PORT= process.env.SERVER_PORT || 3000;

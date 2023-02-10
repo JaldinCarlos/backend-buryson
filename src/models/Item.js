@@ -1,34 +1,35 @@
 import { DataTypes, Sequelize } from "sequelize";
 import { sequelize } from "../database/database";
 
-export const User = sequelize.define(
-  "users",
+export const Item = sequelize.define(
+  "items",
   {
     id: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
     },
-    nickname: {
+    price: {
+        type: DataTypes.FLOAT,
+        validate:{
+          isFloat: true
+        }
+    },
+    name: {
       type: DataTypes.STRING,
       validate:{
-        min: 3,
-        max: 15
+        min: 1,
+        max: 30
       }
     },
-    email: {
-      type: DataTypes.STRING,
-      validate:{
-        isEmail: true
-      }
-    },
-    password: {
+    details: {
         type: DataTypes.STRING,
         validate:{
-          min: 4,
-          max: 15
+          min: 1,
+          max: 100,
+          isNull: true
         }
-    }
+    },
   },
   {
       timestamps: true,
@@ -36,3 +37,5 @@ export const User = sequelize.define(
   }
 );
 
+// Item.belongsTo(Guest);
+// Item.belongsTo(Event);

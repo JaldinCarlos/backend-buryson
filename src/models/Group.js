@@ -1,5 +1,6 @@
 import { DataTypes, Sequelize } from "sequelize";
 import { sequelize } from "../database/database";
+import { Event } from "./Event";
 
 export const Group = sequelize.define(
   "groups",
@@ -11,13 +12,12 @@ export const Group = sequelize.define(
     },
     name: {
       type: DataTypes.STRING,
-    },
-    status: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
-    },
+    }
   },
   {
-    timestamps: true,
+      timestamps: true,
+      paranoid: true
   }
 );
+
+Group.hasMany(Event);
