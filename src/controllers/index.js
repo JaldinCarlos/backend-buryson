@@ -1,10 +1,13 @@
-// export {default as UserController} from "./User";
-// export {default as MemberController} from "./Member";
-// export {default as ItemController} from "./Item";
-// export {default as GuestController} from "./Guest";
-// export {default as GroupController} from "./Group";
-// export {default as EventController} from "./Event";
-
 import * as User from './User';
+import * as Group from './Group';
+import * as Member from './Member';
+import * as Event from './Event';
+import * as Guest from './Guest';
+import * as Item from './Item';
 
 export const UserController = User;
+export const GroupController = Group;
+export const MemberController = Member;
+export const EventCotroller = Event;
+export const GuestController = Guest;
+export const ItemController = Item;

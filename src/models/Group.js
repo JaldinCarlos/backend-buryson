@@ -11,7 +11,10 @@ export const Group = sequelize.define(
       primaryKey: true,
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
+    },
+    code: {
+      type: DataTypes.STRING
     }
   },
   {

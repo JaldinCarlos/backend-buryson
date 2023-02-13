@@ -19,5 +19,7 @@ router
 router
   .route('/:id')
   .get(UserController.getUser)
+  .put(UserController.updateUser)
+  .delete(UserController.deleteUser)
    
 export default router;

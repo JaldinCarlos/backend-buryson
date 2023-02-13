@@ -1,8 +1,20 @@
 import { Router } from "express";
+import { ItemController } from "../controllers";
 
 const router = Router();
-const ROOT_ROUTE = '/items';
 
-router.get(`${ROOT_ROUTE}`);
+router
+  .route('/:event/event')
+  .get(ItemController.getItems);
+
+router
+  .route('/')
+  .post(ItemController.createItem);
+
+router
+  .route('/:id')
+  .put(ItemController.updateItem)
+  .delete(ItemController.deleteItem);
+
 
 export default router;

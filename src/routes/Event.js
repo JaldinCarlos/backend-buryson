@@ -1,8 +1,17 @@
 import { Router } from "express";
+import { EventCotroller } from "../controllers";
 
 const router = Router();
-const ROOT_ROUTE = '/event';
 
-router.get(`${ROOT_ROUTE}`);
+router
+  .route('/:event')
+  .get(EventCotroller.getEvent)
+  .post(EventCotroller.createEvent)
+  .put(EventCotroller.updateEvent)
+  .delete(EventCotroller.deleteEvent);
+
+router
+  .route('/:group/group')
+  .get(EventCotroller.getEventsOfGroup);
 
 export default router;

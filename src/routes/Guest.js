@@ -1,8 +1,19 @@
 import { Router } from "express";
+import { GuestController } from "../controllers";
 
 const router = Router();
-const ROOT_ROUTE = '/guests';
 
-router.get(`${ROOT_ROUTE}`);
+router
+  .route('/')
+  .delete(GuestController.deleteGuest)
+  .post(GuestController.createGuest)
+
+router
+  .route('/:event/event')
+  .get(GuestController.getGuests)
+
+router
+  .route('/:user/user')
+  .get(GuestController.getEventsOfUser)
 
 export default router;

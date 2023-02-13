@@ -1,8 +1,16 @@
 import { Router } from "express";
 
+import { MemberController } from "../controllers";
+
 const router = Router();
-const ROOT_ROUTE = '/members';
 
-router.get(`${ROOT_ROUTE}`);
+router
+  .route('/')
+  .delete(MemberController.deleteMember)
+  .post(MemberController.createMember)
 
+router
+  .route('/:group')
+  .get(MemberController.getMembersOfGroup)
+  
 export default router;

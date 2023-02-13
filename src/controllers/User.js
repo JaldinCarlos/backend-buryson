@@ -38,3 +38,23 @@ export const getUser = async (req, res, next) => {
     next(error);
   }
 }
+
+export const updateUser = async (req, res, next) => {
+  try {
+    const userID = req.params.id;
+    const data = await userService.updateNickname(userID, req.body);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export const deleteUser = async (req, res, next) => {
+  try {
+    const userID = req.params.id;
+    const data = await userService.deleteUser(userID);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+}

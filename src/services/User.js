@@ -1,5 +1,5 @@
 import {UserModel} from '../models';
-import bcrypt from 'bcryptjs';
+
 /**
  * Get all users
  */
@@ -32,7 +32,12 @@ export const getUser = async (id) =>{
 export const createUser = async (body) => {
   try {
     const { nickname, email, password } = body;
-    return await UserModel.create({ nickname, email, password });
+    const user = await UserModel.create({ nickname, email, password });
+    const token = user.getSignedJwtToken();
+    return {
+      token,
+      user
+    }
   } catch (error) {
     return error;
   }
@@ -46,19 +51,49 @@ export const createUser = async (body) => {
 export const login = async (body) => {
   try {
     const { email, password } = body;
-    console.log(email, password);
+
     const user = await UserModel.findOne({ where: { email } });
     if (!user) return res.json({ message: "Invalid user" });
-    //console.log(user);
-    const isMatch = bcrypt.compareSync(password, user.password);
+
+    const isMatch = user.matchPassword(password);
     if (!isMatch) return res.json({ message: "Invalid Password" });
-    console.log(isMatch);
+
     const token = user.getSignedJwtToken();
-    console.log(token);
+
     return {
       token,
       user
     }
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
+
+/**
+ * 
+ * @param {uuid} id 
+ * @returns 
+ */
+export const deleteUser = async (id) => {
+  try {
+    return await UserModel.destroy({where: { id }, returning: true});
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
+
+/**
+ * 
+ * @param {id} id 
+ * @param {{nickname}} body 
+ * @returns 
+ */
+export const updateNickname = async (id, body) => {
+  try {
+    const { nickname } = body;
+    return await UserModel.update({nickname}, {where: { id }, returning: true});
   } catch (error) {
     console.log(error);
     return error;
