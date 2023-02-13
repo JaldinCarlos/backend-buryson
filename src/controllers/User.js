@@ -2,6 +2,18 @@ import { request } from "express";
 import { userService } from "../services";
 
 
+
+export const findByToken = async (req = request, res, next) =>{
+  try {
+    console.log(req.headers.authorization);
+    const data = await userService.findByToken(req.headers.authorization);
+    console.log(data);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export const createUser = async (req = request, res, next) =>{
   try {
     const data = await userService.createUser(req.body);

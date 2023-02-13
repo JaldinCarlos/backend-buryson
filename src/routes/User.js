@@ -17,6 +17,10 @@ router
   .get(UserController.getAllUsers)
 
 router
+  .route('/check')
+  .get(UserController.findByToken)
+
+router
   .route('/:id')
   .get(UserController.getUser)
   .put(UserController.updateUser)

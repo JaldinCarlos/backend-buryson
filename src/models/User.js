@@ -39,7 +39,7 @@ export const User = sequelize.define(
   }
 );
 
-User.addHook("beforeCreate", async (user) => {
+User.beforeCreate(async (user) => {
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
 });
@@ -57,9 +57,12 @@ User.prototype.getSignedJwtToken = function () {
 User.findByToken = async (token) => {
   try {
     const { id } = await jwt.verify(token, process.env.SECRET_JWT);
-    const user = this.findByPk(id);
+    console.log("========================>", id);
+    const user = User.findOne({where:{id}});
     return user;
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.log("--------------------- error");
+    console.error(error);
+    return error;
   }
 };
