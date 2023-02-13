@@ -1,6 +1,10 @@
 import { DataTypes, Sequelize } from "sequelize";
 import { sequelize } from "../database/database";
+import bcrypt from "bcryptjs";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 
+dotenv.config();
 export const User = sequelize.define(
   "users",
   {
@@ -12,21 +16,20 @@ export const User = sequelize.define(
     nickname: {
       type: DataTypes.STRING,
       validate:{
-        min: 3,
-        max: 15
+        min: 1,
+        max: 20      
       }
     },
     email: {
       type: DataTypes.STRING,
       validate:{
-        isEmail: true
+        isEmail: true      
       }
     },
     password: {
         type: DataTypes.STRING,
         validate:{
           min: 4,
-          max: 15
         }
     }
   },
@@ -36,3 +39,27 @@ export const User = sequelize.define(
   }
 );
 
+User.addHook("beforeCreate", async (user) => {
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(user.password, salt);
+});
+
+User.prototype.matchPassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
+User.prototype.getSignedJwtToken = function () {
+  return jwt.sign({ id: this.id }, process.env.SECRET_JWT, {
+    expiresIn: "20d",
+  });
+};
+
+User.findByToken = async (token) => {
+  try {
+    const { id } = await jwt.verify(token, process.env.SECRET_JWT);
+    const user = this.findByPk(id);
+    return user;
+  } catch (e) {
+    console.error(e);
+  }
+};

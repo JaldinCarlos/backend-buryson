@@ -1,0 +1,23 @@
+import { Router } from "express";
+import { UserController } from "../controllers";
+
+const router = Router();
+
+
+router
+  .route('/login')
+  .post(UserController.loginUser)
+
+router
+  .route('/register')
+  .post(UserController.createUser)
+
+router
+  .route('/')
+  .get(UserController.getAllUsers)
+
+router
+  .route('/:id')
+  .get(UserController.getUser)
+   
+export default router;

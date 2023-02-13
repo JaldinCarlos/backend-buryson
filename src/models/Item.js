@@ -58,6 +58,3 @@ Item.belongsTo(Event, {
   foreignKey: 'eventId',
   targetKey: 'id'
 });
-
-// Item.belongsTo(Guest);
-// Item.belongsTo(Event);
