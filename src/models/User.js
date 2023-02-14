@@ -57,8 +57,7 @@ User.prototype.getSignedJwtToken = function () {
 User.findByToken = async (token) => {
   try {
     const { id } = await jwt.verify(token, process.env.SECRET_JWT);
-    console.log("========================>", id);
-    const user = User.findOne({where:{id}});
+    const user = User.findByPk(id);
     return user;
   } catch (error) {
     console.log("--------------------- error");

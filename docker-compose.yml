@@ -1,0 +1,12 @@
+version: "1"
+services:
+  postgres:
+    image: postgres
+    container_name: buryson_db
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test
+    volumes:
+      - /Users/carlos.jaldin/data/db:/var/lib/postgresql/data
