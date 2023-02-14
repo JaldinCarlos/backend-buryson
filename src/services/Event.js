@@ -15,7 +15,7 @@ export const getEvents = async (id) =>{
 
 export const getEvent = async (id) =>{
   try {
-    return await EventModel.findOne({where: {id}});
+    return await EventModel.findByPk(id);
   } catch (error) {
     return error;
   }

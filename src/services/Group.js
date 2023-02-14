@@ -31,6 +31,7 @@ export const createGroup = async (body) => {
     const { name } = body;
     const salt = await bcrypt.genSalt();
     return await GroupModel.create({name, code: salt});
+    // TODO: add method addMember to not create a group without members
   } catch (error) {
     return error;
   }

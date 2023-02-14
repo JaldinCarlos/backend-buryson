@@ -1,13 +1,20 @@
 import { Router } from "express";
+import { body } from "express-validator";
 
 import { MemberController } from "../controllers";
+import { validateFields } from "../middlewares";
+import { validationMsg, validations } from "../utils";
 
 const router = Router();
 
 router
   .route('/')
   .delete(MemberController.deleteMember)
-  .post(MemberController.createMember)
+  .post([
+    body('userId', validationMsg('userId', validations.isEmpty, { not: true})).not().isEmpty(),
+    body('groupId', validationMsg('groupId', validations.isEmpty, { not: true})).not().isEmpty(),
+    validateFields
+  ],MemberController.createMember)
 
 router
   .route('/:group')

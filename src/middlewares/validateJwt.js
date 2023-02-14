@@ -14,8 +14,8 @@ dotenv.config();
  * @param {next} next 
  * @returns 
  */
-export default validateJwt = async (req = request, res = response, next) => {
-  const token = req.header('bearer-token');
+export const validateJwt = async (req = request, res = response, next) => {
+  const token = req.header('Authorization');
   
   if (!token) {
     return res.status(StatusCodes.UNAUTHORIZED).json(

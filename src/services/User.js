@@ -4,7 +4,7 @@ import {UserModel} from '../models';
 /**
  * look for the user that matches with the token
  */
-export const findByToken = async (token) =>{
+export const findByToken = async (token) => {
   try {
     return await UserModel.findByToken(token);
   } catch (error) {
@@ -15,7 +15,7 @@ export const findByToken = async (token) =>{
 /**
  * Get all users
  */
-export const getUsers = async () =>{
+export const getUsers = async () => {
   try {
     return await UserModel.findAll();
   } catch (error) {

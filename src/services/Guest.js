@@ -1,10 +1,11 @@
-import { EventModel, GuestModel } from "../models";
+import { EventModel, GuestModel, UserModel } from "../models";
 
 export const getGuests = async (eventId) => {
   try {
+    console.log(eventId);
     return await GuestModel.findAll({
       where: {
-        eventId
+        eventId: eventId
       },
       include:{
         model: UserModel
@@ -40,9 +41,10 @@ export const createGuest = async (userId, eventId) => {
 
 export const deleteGuest = async (userId, eventId) => {
   try {
-    return await MemberModel.destroy(
+    console.log(eventId, userId);
+    return await GuestModel.destroy(
       { 
-        where: { userId, eventId}, 
+        where: { userId: userId, eventId: eventId}, 
         returning: true 
       }
     );

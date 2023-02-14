@@ -1,2 +1,2 @@
-export {default as validateJwt} from "./validateJwt";
-export {default as validateFields} from "./validateFields";
+export { validateJwt } from "./validateJwt";
+export { validateFields } from "./validateFields";

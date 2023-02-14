@@ -31,3 +31,4 @@ Event.belongsTo(Group, {
   foreignKey: 'groupId',
   targetKey: 'id'
 });
+

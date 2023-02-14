@@ -18,15 +18,9 @@ export const Event = sequelize.define(
         },
         event_date: {
             type: DataTypes.DATE,
-            validate: {
-                isNull: true
-            }
         },
         location_link: {
-            type: DataTypes.STRING,
-            validate: {
-                isNull: true
-            }
+            type: DataTypes.STRING
         }
     },
     {

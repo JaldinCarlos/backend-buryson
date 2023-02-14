@@ -3,7 +3,7 @@ import { userService } from "../services";
 
 
 
-export const findByToken = async (req = request, res, next) =>{
+export const findByToken = async (req = request, res, next) => {
   try {
     console.log(req.headers.authorization);
     const data = await userService.findByToken(req.headers.authorization);
@@ -14,7 +14,7 @@ export const findByToken = async (req = request, res, next) =>{
   }
 }
 
-export const createUser = async (req = request, res, next) =>{
+export const createUser = async (req = request, res, next) => {
   try {
     const data = await userService.createUser(req.body);
     res.json(data);
@@ -23,7 +23,7 @@ export const createUser = async (req = request, res, next) =>{
   }
 }
 
-export const loginUser = async (req, res, next) =>{
+export const loginUser = async (req, res, next) => {
   try {
     const data = await userService.login(req.body);
     res.json(data);

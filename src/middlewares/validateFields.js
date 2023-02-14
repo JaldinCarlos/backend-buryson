@@ -1,4 +1,3 @@
-import { request, response } from "express";
 import { validationResult } from "express-validator";
 import { StatusCodes } from "http-status-codes";
 
@@ -9,7 +8,7 @@ import { StatusCodes } from "http-status-codes";
  * @param {next} next 
  * @returns 
  */
-export default validateFields = (req = request, res = response, next) => {
+export const validateFields = (req, res, next) => {
   const errors = validationResult(req);
   if(!errors.isEmpty()){
     return res.status(StatusCodes.BAD_REQUEST).json(errors);

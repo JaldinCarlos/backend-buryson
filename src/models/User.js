@@ -60,7 +60,6 @@ User.findByToken = async (token) => {
     const user = User.findByPk(id);
     return user;
   } catch (error) {
-    console.log("--------------------- error");
     console.error(error);
     return error;
   }
